@@ -13,7 +13,7 @@ pipeline {
                withEnv(["GOROOT=${root}", "PATH+GO=${root}/bin"]) {
                sh 'go version'
                sh 'pwd'
-               sh 'go get -u -d github.com/gruntwork-io/terratest/tree/master/modules'
+               sh 'go get -u -d github.com/gruntwork-io/terratest/master/modules'
                sh 'go get -u -d github.com/reiver/go-telnet'
                sh 'go get -u -d github.com/gruntwork-io/terratest/modules/http-helper'
                sh 'go get -u -d github.com/fatih/color'
