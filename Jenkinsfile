@@ -14,7 +14,6 @@ pipeline {
       stage ('Doing Test Jobs') {
          steps {
             script {
-               withEnv(["KUBECONFIG=$HOME/.kube/kubeconfig"]){
                def root = tool name: 'Go'
                withEnv(["GOROOT=${root}", "PATH+GO=${root}/bin"]) {
                sh 'go version'
@@ -23,7 +22,6 @@ pipeline {
                sh 'go mod init "github.com/gruntwork-io/terratest/master/modules"'
                sh 'go test -v -tags kubernetes -run TestKubernetes'                  
                 }
-              }
             }    
          }
       }   
