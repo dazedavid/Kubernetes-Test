@@ -12,7 +12,7 @@ pipeline {
                withKubeConfig([
                     credentialsId: 'jenkins-robot',
                     caCertificate: '',
-                    serverUrl: 'https://kubernetes.docker.internal:6443',
+                    serverUrl: 'https://172.31.33.66:8443',
                     contextName: '',
                     clusterName: '',
                     namespace: ''
