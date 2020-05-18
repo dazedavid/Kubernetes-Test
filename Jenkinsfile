@@ -6,10 +6,14 @@ pipeline {
             checkout scm
         }
       }
+      stage ('Path assigning') {
+         steps {
+                PATH="/usr/local/bin:$PATH"
+         }
+      }
       stage ('Doing Test Jobs') {
          steps {
             script {
-               PATH="/usr/local/bin:$PATH"
                def root = tool name: 'Go'
                withEnv(["GOROOT=${root}", "PATH+GO=${root}/bin"]) {
                sh 'go version'
