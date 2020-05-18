@@ -6,14 +6,17 @@ pipeline {
             checkout scm
         }
       }
-      stage ('Path assigning') {
-         steps {
-               sh 'PATH="/usr/local/bin:$PATH"'
-         }
-      }
       stage ('Doing Test Jobs') {
          steps {
             script {
+               withKubeConfig([
+                    credentialsId: 'jenkins-robot',
+                    caCertificate: '',
+                    serverUrl: 'https://kubernetes.docker.internal:6443',
+                    contextName: '',
+                    clusterName: '',
+                    namespace: ''
+                    ]) {
                def root = tool name: 'Go'
                withEnv(["GOROOT=${root}", "PATH+GO=${root}/bin"]) {
                sh 'go version'
@@ -24,6 +27,7 @@ pipeline {
                 }
             }    
          }
+        }   
       }   
    }
 }
