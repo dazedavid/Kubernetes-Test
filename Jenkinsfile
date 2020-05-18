@@ -8,7 +8,7 @@ pipeline {
       }
       stage ('Path assigning') {
          steps {
-                PATH="/usr/local/bin:$PATH"
+               sh 'PATH="/usr/local/bin:$PATH"'
          }
       }
       stage ('Doing Test Jobs') {
