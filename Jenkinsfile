@@ -1,19 +1,30 @@
 pipeline {
    agent any
    stages {
-      stage ('Doing Kubernetes Test') {
+      stage ('Checking out GIT Files') {
          steps {
-            script {
-               def root = tool name: 'Go'
+            checkout scm
+        }
+      }
+      stage ('Checking Go Version') {
+         def root = tool name: 'Go'
                withEnv(["GOROOT=${root}", "PATH+GO=${root}/bin"]) {
                sh 'go version'
-               sh 'pwd'
-               sh 'kubectl get pods'
-               sh 'go mod init "github.com/gruntwork-io/terratest/master/modules"'
-               sh 'go test -v -tags kubernetes -run TestKubernetes'                  
-              }
-          }    
-      }   
-    }   
+            }
+      }
+      stage ('Preparing Go Test') {
+         steps {
+            script {
+              sh 'go mod init "github.com/gruntwork-io/terratest/master/modules"'                
+            }
+         }
+      }
+      stage ('DOing Test') {
+         steps {
+            script {
+               sh 'go test -v -tags kubernetes -run TestKubernetes' 
+            }
+         }
+      }
    }
 }
