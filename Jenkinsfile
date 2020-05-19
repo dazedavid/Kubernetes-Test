@@ -6,30 +6,19 @@ pipeline {
             checkout scm
         }
       }
-      stage ('Checking Go Version') {
+      stage ('Doing Test Jobs') {
          steps {
-            def root = tool name: 'Go'
-            withEnv(["GOROOT=${root}", "PATH+GO=${root}/bin"]) {
-               script { 
+            script {
+               def root = tool name: 'Go'
+               withEnv(["GOROOT=${root}", "PATH+GO=${root}/bin"]) {
                sh 'go version'
-                }
-             }
-          }
-      }  
-      stage ('Preparing Go Test') {
-         steps {
-            script {
-              sh 'go mod init "github.com/gruntwork-io/terratest/master/modules"'                
+                  dir("test"){
+                     sh 'pwd'
+                     sh 'go test -v -tags kubernetes -run TestKubernetes'                  
+                  }
+               }
+               }
             }
          }
-      }
-      stage ('Doing Test') {
-         steps {
-            script {
-               sh 'go test -v -tags kubernetes -run TestKubernetes' 
-            }
-         }
-      }
-   }
-}
-
+      }   
+} 
