@@ -7,10 +7,12 @@ pipeline {
         }
       }
       stage ('Checking Go Version') {
-         def root = tool name: 'Go'
+         steps {
+          def root = tool name: 'Go'
                withEnv(["GOROOT=${root}", "PATH+GO=${root}/bin"]) {
                sh 'go version'
             }
+         }
       }
       stage ('Preparing Go Test') {
          steps {
@@ -26,5 +28,7 @@ pipeline {
             }
          }
       }
+   }
+}
    }
 }
