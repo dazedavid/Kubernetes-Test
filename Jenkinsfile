@@ -1,4 +1,4 @@
-ppipeline {
+pipeline {
    agent any
    stages {
       stage ('Checking out GIT Files') {
@@ -13,7 +13,6 @@ ppipeline {
                }
             }
          }
-      }
       stage ('Preparing Go Test') {
          steps {
             script {
