@@ -1,5 +1,6 @@
 pipeline {
    agent any
+   stages {
       stage ('Doing Kubernetes Test') {
          steps {
             script {
@@ -14,4 +15,5 @@ pipeline {
           }    
       }   
     }   
- }
+   }
+}
