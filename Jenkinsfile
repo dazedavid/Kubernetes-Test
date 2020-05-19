@@ -1,4 +1,4 @@
-pipeline {
+ppipeline {
    agent any
    stages {
       stage ('Checking out GIT Files') {
@@ -9,8 +9,6 @@ pipeline {
       stage ('Checking Go Version') {
          steps {
             scrpit {
-               def root = tool name: 'Go'
-               withEnv(["GOROOT=${root}", "PATH+GO=${root}/bin"]) {
                sh 'go version'
                }
             }
