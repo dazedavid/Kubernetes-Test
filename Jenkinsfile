@@ -8,9 +8,11 @@ pipeline {
       }
       stage ('Checking Go Version') {
          steps {
-          def root = tool name: 'Go'
+            scrpit {
+               def root = tool name: 'Go'
                withEnv(["GOROOT=${root}", "PATH+GO=${root}/bin"]) {
                sh 'go version'
+               }
             }
          }
       }
@@ -21,14 +23,12 @@ pipeline {
             }
          }
       }
-      stage ('DOing Test') {
+      stage ('Doing Test') {
          steps {
             script {
                sh 'go test -v -tags kubernetes -run TestKubernetes' 
             }
          }
       }
-   }
-}
    }
 }
