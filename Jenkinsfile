@@ -1,12 +1,6 @@
 pipeline {
    agent any
-   stages {
-      stage ('Checking out GIT Files') {
-         steps {
-            checkout scm
-        }
-      }
-      stage ('Doing Test Jobs') {
+      stage ('Doing Kubernetes Test') {
          steps {
             script {
                def root = tool name: 'Go'
