@@ -17,8 +17,7 @@ pipeline {
                      sh 'go test -v -tags kubernetes -run TestKubernetes'                  
                   }
                }
-               }
-            }
-         }
-      }   
-} 
+             }
+          }
+       }
+    }   
