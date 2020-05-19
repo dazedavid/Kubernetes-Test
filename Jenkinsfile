@@ -9,10 +9,13 @@ pipeline {
       stage ('Checking Go Version') {
          steps {
             scrpit {
+               def root = tool name: 'Go'
+               withEnv(["GOROOT=${root}", "PATH+GO=${root}/bin"]) {
                sh 'go version'
                }
             }
          }
+      }  
       stage ('Preparing Go Test') {
          steps {
             script {
@@ -29,3 +32,4 @@ pipeline {
       }
    }
 }
+
