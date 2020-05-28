@@ -17,7 +17,7 @@ import (
 
 func TestKubernetes(t *testing.T) {
 
-	options := k8s.NewKubectlOptions("", "", "default")
+	options := k8s.NewKubectlOptions("", "", "ocdp")
 	decision := k8s.AreAllNodesReady(t, options)
 	fmt.Println("Is Kubernetes up and running ?", decision)
 	k8s.RunKubectlAndGetOutputE(t, options, "cluster-info")
