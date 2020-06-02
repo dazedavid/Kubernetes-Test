@@ -17,7 +17,7 @@ import (
 
 func TestKubernetes(t *testing.T) {
 
-	options := k8s.NewKubectlOptions("", "", "ocdp") //put your name spaces
+	options := k8s.NewKubectlOptions("", "", "default") //put your name spaces
 	decision := k8s.AreAllNodesReady(t, options)
 	color.Set(color.FgGreen)
 	fmt.Println("Is Kubernetes up and running ?", decision)
