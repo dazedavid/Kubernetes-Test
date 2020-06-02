@@ -20,7 +20,7 @@ pipeline {
                      sh 'go get -u -d github.com/gruntwork-io/terratest/modules/http-helper'
                      sh 'go get github.com/schollz/progressbar' 
                      sh 'go get -u -d github.com/reiver/go-telnet'   
-                     sh 'go test -v -tags kubernetes -run TestKubernetes'     
+                     sh 'go test -v -tags kubernetes -run TestKubernetes > test.html'     
                       publishHTML (target: [
                            allowMissing: false,
                            alwaysLinkToLastBuild: false,
