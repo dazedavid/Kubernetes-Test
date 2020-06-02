@@ -14,7 +14,15 @@ pipeline {
                sh 'go version'
                      sh 'pwd'
                      sh 'go mod init "github.com/gruntwork-io/terratest/master/modules"'
-                     sh 'go test -v -tags kubernetes -run TestKubernetes'                  
+                     sh 'go test -v -tags kubernetes -run TestKubernetes > test.html'     
+                      publishHTML (target: [
+                           allowMissing: false,
+                           alwaysLinkToLastBuild: false,
+                           keepAll: true,
+                           reportDir: './',
+                           reportFiles: 'test.html',
+                           reportName: 'Kafka Report'
+                         ])
                   }
                }
              }
